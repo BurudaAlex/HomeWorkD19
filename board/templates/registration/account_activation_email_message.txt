@@ -1,0 +1,4 @@
+Thank you for registering at MMORPG Board!
+
+To activate your account, please click the link below:
+{{ activation_url }}

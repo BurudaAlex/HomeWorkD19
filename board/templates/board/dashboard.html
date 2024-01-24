@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>User Dashboard</h2>
+  
+  <h3>Your Advertisements</h3>
+  {% for advertisement in user_advertisements %}
+    <p>{{ advertisement.title }}</p>
+  {% endfor %}
+  
+  <h3>Your Responses</h3>
+  {% for response in user_responses %}
+    <p>{{ response.content }}</p>
+  {% endfor %}
+{% endblock %}

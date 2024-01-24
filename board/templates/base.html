@@ -1,0 +1,22 @@
+{% load static %}
+<html>
+<head>
+  <title>MMORPG Board</title>
+</head>
+<body>
+  <header>
+    <h1>MMORPG Board</h1>
+    {% if user.is_authenticated %}
+      <a href="{% url 'account_logout' %}">Logout</a>
+      <a href="{% url 'dashboard' %}">Dashboard</a>
+    {% else %}
+      <a href="{% url 'account_login' %}">Login</a>
+      <a href="{% url 'account_signup' %}">Sign Up</a>
+    {% endif %}
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>>

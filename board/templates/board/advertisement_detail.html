@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>{{ advertisement.title }}</h2>
+  <p>{{ advertisement.content }}</p>
+
+  {% for media_file in media_files %}
+    {% if media_file.file.url %}
+      {% if media_file.file.url|lower|yesno:"true,false" %}
+        {% with media_file.file.url|lower as file_url %}
+          {% if file_url|slice:'-4:' == '.jpg' or file_url|slice:'-5:' == '.jpeg' or file_url|slice:'-4:' == '.png' or file_url|slice:'-4:' == '.gif' %}
+            <img src="{{ media_file.file.url }}" alt="Image">
+
+            {% if request.user == advertisement.user %}
+              <div class="edit-button">
+                <a href="{% url 'edit_advertisement' pk=advertisement.pk %}">Edit Advertisement</a>
+              </div>
+            {% endif %}
+
+          {% elif file_url|slice:'-4:' == '.mp4' or file_url|slice:'-4:' == '.avi' or file_url|slice:'-4:' == '.mkv' %}
+            <video width="320" height="240" controls>
+              <source src="{{ media_file.file.url }}" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          {% else %}
+            <p><a href="{{ media_file.file.url }}" target="_blank">Download File</a></p>
+          {% endif %}
+        {% endwith %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+{% endblock %}
